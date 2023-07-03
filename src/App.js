@@ -22,7 +22,9 @@ const BaseCard  = () => {
 
   // 미세먼지 수치에 따른 카드 색변경
   const getCardColor = (pm10Value) => {
-    if (pm10Value > 150) {
+    if (pm10Value === "-") {
+      return '#acacac';
+    } else if (pm10Value > 150) {
       return '#e67474';
     } else if (pm10Value > 80) {
       return '#f79036';
@@ -35,7 +37,9 @@ const BaseCard  = () => {
 
   // 미세먼지 수치에 따른 미세먼지 상태
   const getDustState = (pm10Value) => {
-    if (pm10Value > 150) {
+    if (pm10Value === "-") {
+      return '알 수 없음';
+    } else if (pm10Value > 150) {
       return '매우나쁨';
     } else if (pm10Value > 80) {
       return '나쁨';
