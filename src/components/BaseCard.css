@@ -1,0 +1,57 @@
+/*  CSS 사용자 지정 속성. 요기서 물리는 제원 수정하자. */
+:root {
+  --root-width: 350px;
+  --root-height: 200px;
+  --root-color: #fff;
+}
+
+.cardOuter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: orange;
+  position: relative;
+  height: 250px;
+}
+.cardOuter .cardContainer {
+  width: var(--root-width);
+  height: var(--root-height);
+  position: absolute;
+  left: calc(50% - (var(--root-width) / 2));
+  border-radius: 10px;
+}
+.cardOuter .cardContainer .sidoName {
+  color: var(--root-color);
+}
+.cardOuter .cardContainer .stationName {
+  color: var(--root-color);
+}
+.cardOuter .cardContainer .dustValue {
+  display: flex;
+  justify-content: center;
+  color: var(--root-color);
+  font-size: 18px;
+  position: relative;
+  bottom: -50%;
+}
+.cardOuter .cardContainer .outer-dustState{
+  position: relative;
+  left: calc(50% - var(--root-width)/5);
+  background-color: var(--root-color);
+  width: calc(var(--root-width)/3);
+  height: calc(var(--root-height)/3);
+  border-radius: 5px;
+}
+.cardOuter .cardContainer .dustState {
+  color: black;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardOuter .cardContainer .dataTime {
+  color: var(--root-color);
+  position: absolute;
+  left: 25%;
+  bottom: 5%;
+}
