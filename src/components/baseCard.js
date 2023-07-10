@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import getDataURL from'../api/api.js';
+import GetDataURL from'../api/api.js';
 import './BaseCard.css'
 
 const BaseCard  = () => {
@@ -8,7 +8,7 @@ const BaseCard  = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(getDataURL());
+        const response = await fetch(GetDataURL());
         const data = await response.json();
         const fetchedItems = data.response.body.items;
         setItems(fetchedItems);
