@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BaseCard from './components/BaseCard.js';
+import SidoSelector from './components/SidoSelector.js';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
     <span> / 나쁨 : ~ 150</span>
     <span> / 매우나쁨 : 150 ~</span>
 
+      <SidoSelector/>
       <BaseCard />
 
     </div>

@@ -38,7 +38,7 @@ const BaseCard  = () => {
   // 미세먼지 수치에 따른 미세먼지 상태
   const getDustState = (pm10Value) => {
     if (pm10Value === "-") {
-      return '알 수 없음';
+      return '오류';
     } else if (pm10Value > 150) {
       return '매우나쁨';
     } else if (pm10Value > 80) {
@@ -50,8 +50,12 @@ const BaseCard  = () => {
     }
   };
 
+
   return (
     <div className='cardOuter'>
+      
+      <br></br>
+
         {items.map((item, index) => (
           <div className='cardContainer' key={index}
           style={{
@@ -64,10 +68,13 @@ const BaseCard  = () => {
             <div className='outer-dustState'>
               <div className='dustState'>{getDustState(item.pm10Value)}</div>
             </div>
+            <br></br>
+            <br></br>
             <div className='dataTime'>({item.dataTime} 기준)</div>
           </div>
         ))}
     </div>
+    
   );
 };
 
