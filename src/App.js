@@ -4,18 +4,16 @@ import React, { useEffect, useState } from 'react';
 import './App.css'
 import apiData from './apiData.json';
 
-
-
 function App() {
 
   const Header = () => {
     return(
       <div className='inner'>
         <span className='title'>심플 미세먼지 알리미</span>
-        <span className='good'>좋음 : 0 ~ 30</span>
-        <span className='soso'>보통 : ~ 80</span>
-        <span className='bad'>나쁨 : ~ 150</span>
-        <span className='very-bad'>매우나쁨 : 150 ~</span>
+        <span className='good'>😄좋음:~30</span>
+        <span className='soso'>🙂보통:~80</span>
+        <span className='bad'>😭나쁨:~150</span>
+        <span className='very-bad'>👿매우나쁨:150~</span>
       </div>
     )
   }
@@ -125,6 +123,20 @@ function App() {
         return '좋음';
       }
     };
+    // 미세먼지 수치에 따른 미세먼지 상태를 이모지로 보여줌
+    const getEmojiState = (pm10Value) => {
+      if (pm10Value === "-") {
+        return '❔';
+      } else if (pm10Value > 150) {
+        return '👿';
+      } else if (pm10Value > 80) {
+        return '😭';
+      } else if (pm10Value > 30) {
+        return '🙂';
+      } else {
+        return '😄';
+      }
+    };
     return (
       <div className='inner'>
         <div className='cardOuter'>
@@ -134,12 +146,16 @@ function App() {
                 backgroundColor: getCardColor(item.pm10Value),
               }}
               >
-                <div className='sidoName'>시/도 : {item.sidoName}</div>
-                <div className='stationName'>측정소 : {item.stationName}</div>
-                <div className='outer-dustState'>
+                <div className='card-wrap-top'>
+                  <div className='sidoName'>{item.sidoName}</div>
+                  <div className='bookmark'>☆</div>
+                  <div className='stationName'>{item.stationName}</div>
+                </div>
+                <div className='card-wrap-middle'>
+                  <div className='emoji'>{getEmojiState(item.pm10Value)}</div>
                   <div className='dustState'>{getDustState(item.pm10Value)}</div>
                 </div>
-                <div className='dustValue'>미세먼지 치수 : {item.pm10Value}</div>
+                <div className='dustValue'>미세먼지 : {item.pm10Value}</div>
                 <div className='dataTime'>({item.dataTime} 기준)</div>
               </div>
             ))}

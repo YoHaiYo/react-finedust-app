@@ -24,10 +24,11 @@
   justify-content: center;
   background-color: #5190fc;
   padding: 2.5px;
-  margin: 0 5px 0 40px;
+  margin: 0 5px 0 30px;
   border-radius: 5px;
   color: var(--root-color);
   box-shadow: 3px 3px 5px 0px #d0d0d0;
+  font-size: ;
 }
 .soso{
   /* display: flex; */
@@ -96,43 +97,64 @@
   /* border: rgb(110, 110, 110) solid 0.5px; */
   box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
 }
-.cardOuter .cardContainer .sidoName {
+.cardOuter .cardContainer .card-wrap-top {
+  position: relative;
   display: flex;
   justify-content: center;
-  padding: 5px;
+  height: 65px;
+}
+.cardOuter .cardContainer .card-wrap-top .sidoName {
+  position: absolute;
+  top: 13px;
+  left: 10px;
+  height: 20px;
+  color: var(--root-color);
+  font-size: 20px;
+  font-weight: 550;
+}
+.cardOuter .cardContainer .card-wrap-top .stationName {
+  position: absolute;
+  top: 43px;
+  left: 10px;
   height: 20px;
   color: var(--root-color);
 }
-.cardOuter .cardContainer .stationName {
+.cardOuter .cardContainer .card-wrap-top .bookmark {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  color: var(--root-color);
+  font-size: 20px;
+  font-weight: 100;
+}
+.cardOuter .cardContainer .card-wrap-middle{
+  height: 70px;
+  /* border: #3f3f3f solid 1px; */
+}
+.cardOuter .cardContainer .card-wrap-middle .emoji {
   display: flex;
   justify-content: center;
-  padding: 5px;
-  height: 20px;
+  font-size: 35px;
+  font-weight: 100;
+}
+.cardOuter .cardContainer .card-wrap-middle  .dustState {
+  display: flex;
+  justify-content: center;
   color: var(--root-color);
+  font-size: 18px;
+  font-weight: 550;
 }
 .cardOuter .cardContainer .dustValue {
   display: flex;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 0 2px;
   color: var(--root-color);
-  font-size: 18px;
-}
-.cardOuter .cardContainer .outer-dustState{
-  display: flex;
-  justify-content: center;
-  background-color: var(--root-color);
-  margin: 10px 45px 0;
-  border-radius: 5px;
-}
-.cardOuter .cardContainer .dustState {
-  display: flex;
-  justify-content: center;
-  color: rgb(89, 89, 89);
-  font-size: 30px;
+  font-size: 16px;
 }
 .cardOuter .cardContainer .dataTime {
   display: flex;
   justify-content: center;
-  padding: 5px;
+  padding: 2px 0 2px;
   color: var(--root-color);
+  font-size: 16px;
 }
