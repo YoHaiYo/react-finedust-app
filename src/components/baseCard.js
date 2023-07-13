@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import GetDataURL from'../api/api.js';
+import styled from 'styled-components';
 import './BaseCard.css'
 
 const BaseCard  = () => {
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,7 +19,7 @@ const BaseCard  = () => {
     };
 
     fetchData();
-  }, []);
+  }, [ ]);
 
   // 미세먼지 수치에 따른 카드 색변경
   const getCardColor = (pm10Value) => {
@@ -53,8 +54,6 @@ const BaseCard  = () => {
 
   return (
     <div className='cardOuter'>
-      
-      <br></br>
 
         {items.map((item, index) => (
           <div className='cardContainer' key={index}
@@ -79,9 +78,3 @@ const BaseCard  = () => {
 };
 
 export default BaseCard ;
-
-// const Card = styled.div `
-//   /* background-color: items.map에서 style 정의 */ 
-//   width: 350px;
-//   height: 100px;
-// `
