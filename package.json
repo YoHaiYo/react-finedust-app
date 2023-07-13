@@ -36,6 +36,7 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "https://apis.data.go.kr/",
   "devDependencies": {
     "styled-components": "^5.3.10"
   }
