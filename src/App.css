@@ -5,58 +5,134 @@
   --root-color: #fff;
 }
 /* 개별 CSS 속성*/
-.cardOuter{
+
+/* Header */
+.title{
+  display: flex;
+  justify-content: center;
+  /* background-color: #ff9c9c; */
+  padding: 2.5px;
+  margin: 5px;
+  border-radius: 5px;
+  /* color: var(--root-color); */
+  color: #3f3f3f;
+  font-size: 35px;
+  
+}
+.good{
+  /* display: flex; */
+  justify-content: center;
+  background-color: #5190fc;
+  padding: 2.5px;
+  margin: 0 5px 0 40px;
+  border-radius: 5px;
+  color: var(--root-color);
+  box-shadow: 3px 3px 5px 0px #d0d0d0;
+}
+.soso{
+  /* display: flex; */
+  justify-content: center;
+  background-color: #56ed5e;
+  padding: 2.5px;
+  margin: 5px;
+  border-radius: 5px;
+  color: var(--root-color);
+  box-shadow: 3px 3px 5px 0px #d0d0d0;
+}
+.bad{
+  /* display: flex; */
+  justify-content: center;
+  background-color: #f79036;
+  padding: 2.5px;
+  margin: 5px;
+  border-radius: 5px;
+  color: var(--root-color);
+  box-shadow: 3px 3px 5px 0px #d0d0d0;
+}
+.very-bad{
+  /* display: flex; */
+  justify-content: center;
+  background-color: #e67474;
+  padding: 2.5px;
+  margin: 5px;
+  border-radius: 5px;
+  color: var(--root-color);
+  box-shadow: 3px 3px 5px 0px #d0d0d0;
+}
+
+/* SidoDropDown */
+.sido-dropdown {
+  height: 30px;
+  padding: 15px 0px 5px 105px;
+  margin: 10px 35px 5px 35px;
+  background-color: #b9fafc;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px 0px #d0d0d0;
+  font-weight: 600;
+  color: #3f3f3f;
+}
+
+/* BaseCard */
+.inner{
+  width: 500px;
+  /* height: 120px; */
+  margin: 0 auto;
+  /* 부모요소에 position: relative가 있어야 기준이 생겨서 배치가 제대로됨.  */
+  position: relative;
+  /* background-color: rgb(239, 186, 255); */
+  
+}
+.inner .cardOuter{
   display: grid;
   gap: 5px;
-  grid-template-columns: repeat(5, 1fr);
-
-  justify-content: center;
-  align-items: center;
-  /* background-color: orange; */
-  position: relative;
-  /* height: 250px; */
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 0 0 30px;
 }
 .cardOuter .cardContainer {
-  width: var(--root-width);
-  height: var(--root-height);
+  width: calc(var(--root-width)*0.55);
+  height: calc(var(--root-height)*1);
   margin: 5px;
-  /* position: absolute; */
-  /* left: calc(50% - (var(--root-width) / 2)); */
   border-radius: 10px;
-  border: rgb(110, 110, 110) solid 0.5px;
+  /* border: rgb(110, 110, 110) solid 0.5px; */
+  box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
 }
 .cardOuter .cardContainer .sidoName {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  height: 20px;
   color: var(--root-color);
 }
 .cardOuter .cardContainer .stationName {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  height: 20px;
   color: var(--root-color);
 }
 .cardOuter .cardContainer .dustValue {
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
+  padding: 10px;
   color: var(--root-color);
   font-size: 18px;
-  position: relative;
-  bottom: -50%;
 }
 .cardOuter .cardContainer .outer-dustState{
-  position: relative;
-  /* left: calc(50% - var(--root-width)/5); */
+  display: flex;
+  justify-content: center;
   background-color: var(--root-color);
-  width: calc(var(--root-width)/3);
-  height: calc(var(--root-height)/3);
+  margin: 10px 45px 0;
   border-radius: 5px;
 }
 .cardOuter .cardContainer .dustState {
-  color: black;
-  font-size: 35px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  color: rgb(89, 89, 89);
+  font-size: 30px;
 }
 .cardOuter .cardContainer .dataTime {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
   color: var(--root-color);
-  /* position: absolute; */
-  /* left: 25%; */
-  bottom: 5%;
 }
