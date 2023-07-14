@@ -9,11 +9,14 @@ function App() {
   const Header = () => {
     return(
       <div className='inner'>
-        <span className='title'>심플 미세먼지 알리미</span>
-        <span className='good'>😄좋음:~30</span>
-        <span className='soso'>🙂보통:~80</span>
-        <span className='bad'>😭나쁨:~150</span>
-        <span className='very-bad'>👿매우나쁨:150~</span>
+        <div className='fixed-bar-top'>
+          <span className='title'>심플 미세먼지 알리미</span>
+          <span className='good'>😄좋음:~30</span>
+          <span className='soso'>🙂보통:~80</span>
+          <span className='bad'>😭나쁨:~150</span>
+          <span className='very-bad'>👿매우나쁨:150~</span>
+          <SidoDropDown/>
+        </div>
       </div>
     )
   }
@@ -137,8 +140,23 @@ function App() {
         return '😄';
       }
     };
+    
+    // 즐겨찾기 추가 함수
+  const BookmarkChange = () => {
+    const [isClicked, setIsClicked] = useState(false);
+    const handleClick = () => {
+      setIsClicked(!isClicked);
+      // alert('즐겨찾기에 추가되었습니다.');
+    };
+    return(
+      <div className='bookmark'onClick={handleClick}>
+        {isClicked ?<i class="fa-solid fa-star"></i>:<i class="fa-regular fa-star"></i>}
+      </div>
+    )
+  }
+  // 기본 카드 구성
     return (
-      <div className='inner'>
+      <div className='basecard-inner'>
         <div className='cardOuter'>
             {items.map((item, index) => (
               <div className='cardContainer' key={index}
@@ -148,7 +166,7 @@ function App() {
               >
                 <div className='card-wrap-top'>
                   <div className='sidoName'>{item.sidoName}</div>
-                  <div className='bookmark'>☆</div>
+                  <BookmarkChange/>
                   <div className='stationName'>{item.stationName}</div>
                 </div>
                 <div className='card-wrap-middle'>
@@ -164,12 +182,59 @@ function App() {
     );
   };
 
+  // ------------ 임시 스크린 -----------
+  const MyplaceScreen = () => {
+    return <div style={{ backgroundColor: 'lightgreen', height: '1000px'}}></div>;
+  };
+  
+  const BookmarkScreen = () => {
+    return <div style={{ backgroundColor: 'lightblue', height: '1000px' }}></div>;
+  };
+  // ------------------------------------
+
+  const BottomNavigationBar = () => {
+    const [activeScreen, setActiveScreen] = useState('HomeScreen');
+    const handleScreenChange = (screen) => {
+      setActiveScreen(screen);
+    };
+    return (
+      <div className='inner'>
+        <div className="bottom-nav">
+          <span
+            className={`nav-item ${activeScreen === 'MyplaceScreen' ? 'active' : ''}`}
+            onClick={() => handleScreenChange('MyplaceScreen')}
+          >
+            <span className='bad'>내 지역 보기</span>
+          </span>
+          <span
+            className={`nav-item ${activeScreen === 'HomeScreen' ? 'active' : ''}`}
+            onClick={() => handleScreenChange('HomeScreen')}
+          >
+            <span className='bad'>전체 지역보기</span>
+          </span>
+          <span
+            className={`nav-item ${activeScreen === 'BookmarkScreen' ? 'active' : ''}`}
+            onClick={() => handleScreenChange('BookmarkScreen')}
+          >
+            <span className='bad'>즐겨찾기</span>
+          </span>
+        </div>
+        {/* 스크린선택 */}
+        <div className="content">
+          {activeScreen === 'MyplaceScreen' && <MyplaceScreen />}
+          {activeScreen === 'HomeScreen' && <BaseCard />}
+          {activeScreen === 'BookmarkScreen' && <BookmarkScreen />}
+        </div>
+      </div>
+    );
+  };
+
   // 앱 구성
   return (
     <div>
       <Header/>
-      <SidoDropDown/>
-      <BaseCard />
+      {/* <BaseCard /> */}
+      <BottomNavigationBar/>
     </div>
   );
 }
