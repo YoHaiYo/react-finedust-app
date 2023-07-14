@@ -6,5 +6,7 @@
 
 **※ 아직 미완성입니다**
 
-![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/81398759-0001-4107-b34e-96da7552fa8c)
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/ef7a4f91-4f8f-4ca0-befc-86ea2aebd720)
+
+
 
