@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import BaseCard from './components/BaseCard.js';
-// import SidoSelector from './components/SidoSelector.js';
 import './App.css'
 import apiData from './apiData.json';
 
