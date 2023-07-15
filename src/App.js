@@ -55,7 +55,7 @@ function App() {
     )
   }
 
-  /// GetApiDataXXX 는 GetApiData와 같은 기능의 함수인데 비교안으로 남겨둡니다. 
+  // # GetApiDataXXX 는 GetApiData와 같은 기능의 함수인데 비교안으로 남겨둡니다. 
   const GetApiDataXXX = () => {
     // fullURL : http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=서울&pageNo=1&numOfRows=10&returnType=json&serviceKey=Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA%2B9GTuGyRDBE7rDIMg3%2BkQJaRxk3ulGEMe9A%3D%3D&ver=1.0
     // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
