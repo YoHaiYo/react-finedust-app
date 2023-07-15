@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './App.css'
-import apiData from './apiData.json';
 
 function App() {
 
@@ -8,7 +7,7 @@ function App() {
     return(
       <div className='inner'>
         <div className='fixed-bar-top'>
-          <span className='title'>심플 미세먼지 알리미</span>
+        <span className='title'><img src="/img/finedust-logo.png" alt="title-logo"></img></span>
           <span className='good'>😄좋음:~30</span>
           <span className='soso'>🙂보통:~80</span>
           <span className='bad'>😭나쁨:~150</span>
@@ -56,7 +55,8 @@ function App() {
     )
   }
 
-  const GetApiData = () => {
+  /// GetApiDataXXX 는 GetApiData와 같은 기능의 함수인데 비교안으로 남겨둡니다. 
+  const GetApiDataXXX = () => {
     // fullURL : http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=서울&pageNo=1&numOfRows=10&returnType=json&serviceKey=Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA%2B9GTuGyRDBE7rDIMg3%2BkQJaRxk3ulGEMe9A%3D%3D&ver=1.0
     // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
     const baseURL = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
@@ -72,28 +72,47 @@ function App() {
       );
   };
 
+  const GetApiData = () => {
+      // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
+      const apiKey = 'Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA+9GTuGyRDBE7rDIMg3+kQJaRxk3ulGEMe9A==';
+      const baseURL = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
+      const queryParams = {    
+        // 시도이름(18개) : 전국, 서울, 부산, 대구, 인천, 광주, 대전, 울산, 경기, 강원, 충북, 충남, 전북, 전남, 경북, 경남, 제주, 세종
+        sidoName: selectedSido,
+        pageNo: 1,
+        numOfRows: 20,
+        returnType: 'json',
+        serviceKey: apiKey,
+        ver: '1.0',
+      };
+      const queryString = Object.keys(queryParams)
+        .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(queryParams[key])}`)
+        .join('&');
+      return (`${baseURL}?${queryString}`);
+    };
+
   const BaseCard  = () => {
     const [items, setItems] = useState([]);
 
     /// ★API 통신으로 데이터 가져오기 : 원래코드
-    // useEffect(() => {
-    //   const fetchData = async () => {
-    //     try {
-    //       const response = await fetch(GetApiData());
-    //       const data = await response.json();
-    //       const fetchedItems = data.response.body.items;
-    //       setItems(fetchedItems);
-    //     } catch (error) {
-    //       console.error('Error fetching data:', error);
-    //     }
-    //   };
-    //   fetchData();
-    // });
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(GetApiData());
+          const data = await response.json();
+          const fetchedItems = data.response.body.items;
+          setItems(fetchedItems);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      fetchData();
+    });
 
     /// ☆json파일로 데이터가져오기 : 서버오류일때 임시로 쓰기.
-    useEffect(() => {
-      setItems(apiData.response.body.items);
-    }, []);
+    // useEffect(() => {
+    //   setItems(apiData.response.body.items);
+    // }, []);
 
     // 미세먼지 수치에 따른 카드 색변경
     const getCardColor = (pm10Value) => {
@@ -194,8 +213,10 @@ function App() {
 
   const BottomNavigationBar = () => {
     const [activeScreen, setActiveScreen] = useState('HomeScreen');
+    const [isClicked, setIsClicked] = useState(false);
     const handleScreenChange = (screen) => {
       setActiveScreen(screen);
+      setIsClicked(true);
     };
     return (
       <div className='inner'>
@@ -205,9 +226,9 @@ function App() {
               className={`nav-item ${activeScreen === 'MyplaceScreen' ? 'active' : ''}`}
               onClick={() => handleScreenChange('MyplaceScreen')}
             >
-              <div className='nav-items-icon'>
+              <div className='nav-items-icon'>              
                 <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.961 8.429c-.831.982-1.614 1.918-1.961 3.775v6.683l-4 2.479v-9.161c-.206-1.104-.566-1.885-1-2.539v11.475l-4-2.885v-13.069l1.577 1.138c-.339-.701-.577-1.518-.577-2.524l.019-.345-2.019-1.456-5.545 4-6.455-4v18l6.455 4 5.545-4 5.545 4 6.455-4v-11.618l-.039.047zm-17.961 12.936l-4-2.479v-13.294l4 2.479v13.294zm5-3.11l-4 2.885v-13.067l4-2.886v13.068zm9-18.255c-2.1 0-4 1.702-4 3.801 0 3.121 3.188 3.451 4 8.199.812-4.748 4-5.078 4-8.199 0-2.099-1.9-3.801-4-3.801zm0 5.5c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5 1.5.671 1.5 1.5-.672 1.5-1.5 1.5z"/></svg>
-                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M23.961 8.429c-.831.982-1.614 1.918-1.961 3.775v6.683l-4 2.479v-9.161c-.347-1.857-1.13-2.793-1.961-3.775-.908-1.075-2.039-2.411-2.039-4.629l.019-.345-2.019-1.456-5.545 4-6.455-4v18l6.455 4 5.545-4 5.545 4 6.455-4v-11.618l-.039.047zm-12.961 9.826l-4 2.885v-13.067l4-2.886v13.068zm9-18.255c-2.1 0-4 1.702-4 3.801 0 3.121 3.188 3.451 4 8.199.812-4.748 4-5.078 4-8.199 0-2.099-1.9-3.801-4-3.801zm0 5.5c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5 1.5.671 1.5 1.5-.672 1.5-1.5 1.5z"/></svg> */}
+                {/* <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.961 8.429c-.831.982-1.614 1.918-1.961 3.775v6.683l-4 2.479v-9.161c-.347-1.857-1.13-2.793-1.961-3.775-.908-1.075-2.039-2.411-2.039-4.629l.019-.345-2.019-1.456-5.545 4-6.455-4v18l6.455 4 5.545-4 5.545 4 6.455-4v-11.618l-.039.047zm-12.961 9.826l-4 2.885v-13.067l4-2.886v13.068zm9-18.255c-2.1 0-4 1.702-4 3.801 0 3.121 3.188 3.451 4 8.199.812-4.748 4-5.078 4-8.199 0-2.099-1.9-3.801-4-3.801zm0 5.5c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5 1.5.671 1.5 1.5-.672 1.5-1.5 1.5z"/></svg>               */}
               </div>
               <span className='nav-items-text'>내 지역 보기</span>
             </span>
