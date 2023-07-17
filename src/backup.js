@@ -1,19 +1,44 @@
-// const GetDataURL = () => {
-//   // fullURL : http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=서울&pageNo=1&numOfRows=10&returnType=json&serviceKey=Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA%2B9GTuGyRDBE7rDIMg3%2BkQJaRxk3ulGEMe9A%3D%3D&ver=1.0
-//   // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
-//   const baseURL = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
-//   // 시도이름 : 전국, 서울, 부산, 대구, 인천, 광주, 대전, 울산, 경기, 강원, 충북, 충남, 전북, 전남, 경북, 경남, 제주, 세종
-//   const sidoName = '인천'
-//   const pageNo = '1'
-//   const numOfRows = '10'
-//   const returnType = 'json'
-//   const apiKey = 'Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA+9GTuGyRDBE7rDIMg3+kQJaRxk3ulGEMe9A==';
-//   const ver = '1.0'
-    
-//   return (
-//     `${baseURL}?sidoName=${sidoName}&pageNo=${pageNo}&numOfRows=${numOfRows}&returnType=${returnType}&serviceKey=${apiKey}&ver=${ver}`
+// // 즐겨찾기 추가 함수
+// const BookmarkChange = ({ sidoName, stationName, pm10Value, dataTime }) => {
+//   const [isClicked, setIsClicked] = useState(false);
+//   useEffect(() => {
+//     const bookmarkedItems = JSON.parse(localStorage.getItem('bookmarkedItems')) || [];
+//     const isItemBookmarked = bookmarkedItems.some(
+//       (item) =>
+//         item.sidoName === sidoName &&
+//         item.stationName === stationName &&
+//         item.pm10Value === pm10Value &&
+//         item.dataTime === dataTime
 //     );
+//     setIsClicked(isItemBookmarked);
+//   }, [sidoName, stationName, pm10Value, dataTime]);
+//   const handleClick = () => {
+//     // 다른 바텀네비바를 클릭하면 즐겨찾기에 저장된 상태가 초기화되서 localStorage로 상태 데이터를 유저의 로컬장치에 저장하는 방법을 사용.
+//     const updatedBookmarkList = JSON.parse(localStorage.getItem('bookmarkedItems')) || [];  
+//     if (!isClicked) {
+//       const newItem = { sidoName, stationName, pm10Value, dataTime };
+//       updatedBookmarkList.push(newItem);
+//       setIsClicked(true);
+//     } else {
+//       const itemIndex = updatedBookmarkList.findIndex(
+//         (item) =>
+//           item.sidoName === sidoName &&
+//           item.stationName === stationName &&
+//           item.pm10Value === pm10Value &&
+//           item.dataTime === dataTime
+//       );
+//       if (itemIndex !== -1) {
+//         updatedBookmarkList.splice(itemIndex, 1);
+//         setIsClicked(false);
+//       }
+//     }
+//     // Update local storage with updated bookmarked items
+//     localStorage.setItem('bookmarkedItems', JSON.stringify(updatedBookmarkList));
+//     console.log(updatedBookmarkList)
+//   };
+//   return (
+//     <div className='bookmark' onClick={handleClick}>
+//       {isClicked ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}
+//     </div>
+//   );
 // };
-
-
-

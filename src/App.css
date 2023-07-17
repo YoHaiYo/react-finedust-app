@@ -1,14 +1,16 @@
 /*  CSS 사용자 지정 속성. 요기서 물리는 제원 수정하자. */
 :root {
+  /* 대부분의 최신 스마트폰 뷰포트 width가 412px임. */
+  --root-view-width: 412px;
   --root-width: 350px;
   --root-height: 200px;
-  --root-color: #fff;
+  --root-color: #fff;;
 }
 img{
   display: block;
 }
 .inner{
-  width: 500px;
+  width: var(--root-view-width);
   margin: 0 auto;
   /* 부모요소에 position: relative가 있어야 기준이 생겨서 배치가 제대로됨.  */
   position: relative;
@@ -16,65 +18,69 @@ img{
   /* border: #3f3f3f solid 1px; */
 }
 /* Header */
-.fixed-bar-top{
-  position: fixed;
-  top: 0px;
-  z-index: 9;
-  width: 500px;
-  background-color: #fff;
-}
+
 .title{
   display: flex;
   justify-content: center;
   /* background-color: #ff9c9c; */
   padding: 2.5px;
   margin: 5px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   /* color: var(--root-color); */
-  color: #3f3f3f;
-  font-size: 35px;
+  /* color: #3f3f3f; */
+  /* font-size: 35px; */
 }
 .title img{
-  width: 440px;
+  width: 410px;
   border-radius: 10px;
-  box-shadow: 3px 3px 5px 0px #d0d0d0;
+  /* box-shadow: 3px 1px 5px 0px #d0d0d0; */
+  padding-bottom: 5px;
 }
-.good{
+.fixed-bar-top{
+  position: fixed;
+  top: 0px;
+  z-index: 9;
+  width: var(--root-view-width);
+  padding: 0px 9px 5px 0px;
+  background-color: #fff;
+  font-size: 14.5px;
+}
+.fixed-bar-top .good{
   /* display: flex; */
   justify-content: center;
   background-color: #5190fc;
   padding: 2.5px;
-  margin: 0 5px 0 30px;
+  margin: 0 5px 0 6px;
   border-radius: 5px;
   color: var(--root-color);
   box-shadow: 3px 3px 5px 0px #d0d0d0;
 }
-.soso{
+.fixed-bar-top .soso{
   /* display: flex; */
   justify-content: center;
   background-color: #56ed5e;
   padding: 2.5px;
-  margin: 5px;
+  margin: 4px;
   border-radius: 5px;
   color: var(--root-color);
   box-shadow: 3px 3px 5px 0px #d0d0d0;
 }
-.bad{
+.fixed-bar-top .bad{
   /* display: flex; */
   justify-content: center;
   background-color: #f79036;
   padding: 2.5px;
-  margin: 5px;
+  margin: 4px;
   border-radius: 5px;
   color: var(--root-color);
   box-shadow: 3px 3px 5px 0px #d0d0d0;
 }
-.very-bad{
+.fixed-bar-top .very-bad{
   /* display: flex; */
   justify-content: center;
   background-color: #e67474;
   padding: 2.5px;
-  margin: 5px;
+  margin: 4px;
   border-radius: 5px;
   color: var(--root-color);
   box-shadow: 3px 3px 5px 0px #d0d0d0;
@@ -86,9 +92,9 @@ img{
   top: 117px;
   z-index: 9;
   height: 30px;
-  width: 320px;
+  width: 297px;
   padding: 15px 0px 5px 105px;
-  margin: 10px 35px 5px 35px;
+  margin: 10px 35px 5px 5px;
   background-color: #b9fafc;
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0px #d0d0d0;
@@ -98,7 +104,7 @@ img{
 
 /* BaseCard */
 .basecard-inner{
-  width: 500px;
+  width: var(--root-view-width);
   margin: 0 auto;
   /* 부모요소에 position: relative가 있어야 기준이 생겨서 배치가 제대로됨.  */
   position: relative;
@@ -110,7 +116,7 @@ img{
   display: grid;
   gap: 5px;
   grid-template-columns: repeat(2, 1fr);
-  padding: 30px 0 0 30px;
+  padding: 30px 0 0 1px;
 }
 .cardOuter .cardContainer {
   width: calc(var(--root-width)*0.55);
@@ -188,7 +194,7 @@ img{
   bottom: 0;
   z-index: 9;
   height: 50px;
-  width: 500px;
+  width: var(--root-view-width);
   border-radius: 5px;
   background: #ffffff;
   box-shadow: 0px -3px 10px -2px #989898;
@@ -207,4 +213,10 @@ img{
   font-size: 11px;
   display: flex;
   justify-content: center;
+}
+/* SearchScreen */
+.search-input{
+  height: 18px;
+}
+.search-btn{
 }

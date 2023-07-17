@@ -1,5 +1,95 @@
 import React, { useEffect, useState } from 'react';
 import './App.css'
+import apiData from './apiData.json'
+
+/// App함수 밖으로 빼서 전역함수로 만들기 ! 
+  // 미세먼지 수치에 따른 카드 색변경
+  const getCardColor = (pm10Value) => {
+    if (pm10Value === "-") {
+      return '#acacac';
+    } else if (pm10Value > 150) {
+      return '#e67474';
+    } else if (pm10Value > 80) {
+      return '#f79036';
+    } else if (pm10Value > 30) {
+      return '#56ed5e';
+    } else {
+      return '#5190fc';
+    }
+  };
+  // 미세먼지 수치에 따른 미세먼지 상태
+  const getDustState = (pm10Value) => {
+    if (pm10Value === "-") {
+      return '통신오류';
+    } else if (pm10Value > 150) {
+      return '매우나쁨';
+    } else if (pm10Value > 80) {
+      return '나쁨';
+    } else if (pm10Value > 30) {
+      return '보통';
+    } else {
+      return '좋음';
+    }
+  };
+  // 미세먼지 수치에 따른 미세먼지 상태를 이모지로 보여줌
+  const getEmojiState = (pm10Value) => {
+    if (pm10Value === "-") {
+      return '❔';
+    } else if (pm10Value > 150) {
+      return '👿';
+    } else if (pm10Value > 80) {
+      return '😭';
+    } else if (pm10Value > 30) {
+      return '🙂';
+    } else {
+      return '😄';
+    }
+  };
+  // 즐겨찾기 추가 함수
+  const BookmarkChange = ({ sidoName, stationName, pm10Value, dataTime }) => {
+    const [isClicked, setIsClicked] = useState(false);
+    useEffect(() => {
+      const bookmarkedItems = JSON.parse(localStorage.getItem('bookmarkedItems')) || [];
+      const isItemBookmarked = bookmarkedItems.some(
+        (item) =>
+          item.sidoName === sidoName &&
+          item.stationName === stationName &&
+          item.pm10Value === pm10Value &&
+          item.dataTime === dataTime
+      );
+      setIsClicked(isItemBookmarked);
+    }, [sidoName, stationName, pm10Value, dataTime]);
+    const handleClick = () => {
+      // 다른 바텀네비바를 클릭하면 즐겨찾기에 저장된 상태가 초기화되서 localStorage로 상태 데이터를 유저의 로컬장치에 저장하는 방법을 사용.
+      const updatedBookmarkList = JSON.parse(localStorage.getItem('bookmarkedItems')) || [];  
+      if (!isClicked) {
+        const newItem = { sidoName, stationName, pm10Value, dataTime };
+        updatedBookmarkList.push(newItem);
+        setIsClicked(true);
+      } else {
+        const itemIndex = updatedBookmarkList.findIndex(
+          (item) =>
+            item.sidoName === sidoName &&
+            item.stationName === stationName &&
+            item.pm10Value === pm10Value &&
+            item.dataTime === dataTime
+        );
+        if (itemIndex !== -1) {
+          updatedBookmarkList.splice(itemIndex, 1);
+          setIsClicked(false);
+        }
+      }
+      // Update local storage with updated bookmarked items
+      localStorage.setItem('bookmarkedItems', JSON.stringify(updatedBookmarkList));
+      console.log(updatedBookmarkList)
+    };
+    
+    return (
+      <div className='bookmark' onClick={handleClick}>
+        {isClicked ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}
+      </div>
+    );
+  };
 
 function App() {
 
@@ -7,7 +97,7 @@ function App() {
     return(
       <div className='inner'>
         <div className='fixed-bar-top'>
-        <span className='title'><img src="/img/finedust-logo.png" alt="title-logo"></img></span>
+          <span className='title'><img src="/img/finedust-logo.png" alt="title-logo"/></span>
           <span className='good'>😄좋음:~30</span>
           <span className='soso'>🙂보통:~80</span>
           <span className='bad'>😭나쁨:~150</span>
@@ -22,7 +112,7 @@ function App() {
     const newSelectedSido = event.target.value;
     setSelectedSido(newSelectedSido);
     return (
-      console.log(newSelectedSido)
+      console.log('선택된 시/도 : ',newSelectedSido)
     )
   };
   const SidoDropDown = () => {
@@ -55,7 +145,7 @@ function App() {
     )
   }
 
-  // # GetApiDataXXX 는 GetApiData와 같은 기능의 함수인데 비교안으로 남겨둡니다. 
+  // # GetApiDataXXX 는 GetApiData와 같은 기능의 함수인데 더 직관적인거 같아서 비교안으로 남겨둡니다. 
   const GetApiDataXXX = () => {
     // fullURL : http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=서울&pageNo=1&numOfRows=10&returnType=json&serviceKey=Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA%2B9GTuGyRDBE7rDIMg3%2BkQJaRxk3ulGEMe9A%3D%3D&ver=1.0
     // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
@@ -72,6 +162,7 @@ function App() {
       );
   };
 
+  // GetApiData : API 통신할 URL주소를 관리하는 함수에요.
   const GetApiData = () => {
       // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
       const apiKey = 'Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA+9GTuGyRDBE7rDIMg3+kQJaRxk3ulGEMe9A==';
@@ -94,6 +185,12 @@ function App() {
   const BaseCard  = () => {
     const [items, setItems] = useState([]);
 
+    useEffect(() => {
+    const bookmarkedItems = JSON.parse(localStorage.getItem('bookmarkedItems')) || [];
+    setItems(bookmarkedItems);
+  }, []);
+    
+
     /// ★API 통신으로 데이터 가져오기 : 원래코드
     useEffect(() => {
       const fetchData = async () => {
@@ -113,63 +210,7 @@ function App() {
     // useEffect(() => {
     //   setItems(apiData.response.body.items);
     // }, []);
-
-    // 미세먼지 수치에 따른 카드 색변경
-    const getCardColor = (pm10Value) => {
-      if (pm10Value === "-") {
-        return '#acacac';
-      } else if (pm10Value > 150) {
-        return '#e67474';
-      } else if (pm10Value > 80) {
-        return '#f79036';
-      } else if (pm10Value > 30) {
-        return '#56ed5e';
-      } else {
-        return '#5190fc';
-      }
-    };
-    // 미세먼지 수치에 따른 미세먼지 상태
-    const getDustState = (pm10Value) => {
-      if (pm10Value === "-") {
-        return '오류';
-      } else if (pm10Value > 150) {
-        return '매우나쁨';
-      } else if (pm10Value > 80) {
-        return '나쁨';
-      } else if (pm10Value > 30) {
-        return '보통';
-      } else {
-        return '좋음';
-      }
-    };
-    // 미세먼지 수치에 따른 미세먼지 상태를 이모지로 보여줌
-    const getEmojiState = (pm10Value) => {
-      if (pm10Value === "-") {
-        return '❔';
-      } else if (pm10Value > 150) {
-        return '👿';
-      } else if (pm10Value > 80) {
-        return '😭';
-      } else if (pm10Value > 30) {
-        return '🙂';
-      } else {
-        return '😄';
-      }
-    };
     
-    // 즐겨찾기 추가 함수
-  const BookmarkChange = () => {
-    const [isClicked, setIsClicked] = useState(false);
-    const handleClick = () => {
-      setIsClicked(!isClicked);
-      // alert('즐겨찾기에 추가되었습니다.');
-    };
-    return(
-      <div className='bookmark'onClick={handleClick}>
-        {isClicked ?<i class="fa-solid fa-star"></i>:<i class="fa-regular fa-star"></i>}
-      </div>
-    )
-  }
   // 기본 카드 구성
     return (      
       <div className='basecard-inner'>
@@ -183,7 +224,7 @@ function App() {
               >
                 <div className='card-wrap-top'>
                   <div className='sidoName'>{item.sidoName}</div>
-                  <BookmarkChange/>
+                  <BookmarkChange sidoName={item.sidoName} stationName={item.stationName} pm10Value={item.pm10Value} dataTime={item.dataTime} />
                   <div className='stationName'>{item.stationName}</div>
                 </div>
                 <div className='card-wrap-middle'>
@@ -200,16 +241,136 @@ function App() {
   };
 
   // ------------ 임시 스크린 -----------
-  const MyplaceScreen = () => {
-    return <div style={{ backgroundColor: 'lightgreen', height: '1000px'}}></div>;
-  };
-  const BookmarkScreen = () => {
-    return <div style={{ backgroundColor: 'lightblue', height: '1000px' }}></div>;
-  };
+ 
   const MenuScreen = () => {
     return <div style={{ backgroundColor: 'orange', height: '1000px' }}></div>;
   };
   // ------------------------------------
+
+  // 검색하기 스크린
+  const SearchScreen = () => {
+    const [searchText, setSearchText] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
+    const [items, setItems] = useState([]);
+  
+    const fetchData = async () => {
+      try {
+        const response = await fetch(GetApiData());
+        const data = await response.json();
+        const fetchedItems = data.response.body.items;
+        const filteredItems = fetchedItems.filter(
+          (item) => item.stationName.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setItems(filteredItems);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    useEffect(() => {
+      if (isSearching) {
+        fetchData();
+      }
+    }, [isSearching]);
+  
+    const handleSearchInputChange = (event) => {
+      setSearchText(event.target.value);
+    };
+  
+    const handleSearchButtonClick = () => {
+      setIsSearching(true);
+    };
+  
+    return (
+      <div className='basecard-inner'>
+        <div className='sido-dropdown'>
+          <input 
+            className='search-input'
+            type='text'
+            placeholder='구/동/도로명으로 검색'
+            value={searchText}
+            onChange={handleSearchInputChange}
+    
+          />
+          <button className='search-btn' onClick={handleSearchButtonClick}>검색</button>
+        </div>
+        <div className='cardOuter'>
+          {items.map((item, index) => (
+            <div
+              className='cardContainer'
+              key={index}
+              style={{
+                backgroundColor: getCardColor(item.pm10Value),
+              }}
+            >
+              {/* Render card contents */}
+              <div className='card-wrap-top'>
+                <div className='sidoName'>{item.sidoName}</div>
+                <BookmarkChange
+                  sidoName={item.sidoName}
+                  stationName={item.stationName}
+                  pm10Value={item.pm10Value}
+                  dataTime={item.dataTime}
+                />
+                <div className='stationName'>{item.stationName}</div>
+              </div>
+              <div className='card-wrap-middle'>
+                <div className='emoji'>{getEmojiState(item.pm10Value)}</div>
+                <div className='dustState'>{getDustState(item.pm10Value)}</div>
+              </div>
+              <div className='dustValue'>미세먼지 : {item.pm10Value}</div>
+              <div className='dataTime'>({item.dataTime} 기준)</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+  
+  
+  
+
+  // 즐겨찾기 스크린
+  const BookmarkScreen = () => {
+    const bookmarkedItems = JSON.parse(localStorage.getItem('bookmarkedItems')) || [];
+  
+    return (
+      <div className='basecard-inner'>
+        
+        <div className='cardOuter'>
+          {bookmarkedItems.map((item, index) => (
+            <div
+              className='cardContainer'
+              key={index}
+              style={{
+                backgroundColor: getCardColor(item.pm10Value),
+              }}
+            >
+              <div className='card-wrap-top'>
+                <div className='sidoName'>{item.sidoName}</div>
+                <BookmarkChange
+                  sidoName={item.sidoName}
+                  stationName={item.stationName}
+                  pm10Value={item.pm10Value}
+                  dataTime={item.dataTime}
+                />
+                <div className='stationName'>{item.stationName}</div>
+              </div>
+              <div className='card-wrap-middle'>
+                <div className='emoji'>{getEmojiState(item.pm10Value)}</div>
+                <div className='dustState'>{getDustState(item.pm10Value)}</div>
+              </div>
+              <div className='dustValue'>미세먼지 : {item.pm10Value}</div>
+              <div className='dataTime'>({item.dataTime} 기준)</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+  
+  
+  
 
   const BottomNavigationBar = () => {
     const [activeScreen, setActiveScreen] = useState('HomeScreen');
@@ -217,20 +378,36 @@ function App() {
     const handleScreenChange = (screen) => {
       setActiveScreen(screen);
       setIsClicked(true);
+      // 각 바텀네비바에 후속 url 주소 추가
+      switch (screen) {
+        case 'SearchScreen':
+          window.history.pushState(null, '', '/myplace');
+          break;
+        case 'HomeScreen':
+          window.history.pushState(null, '', '/');
+          break;
+        case 'BookmarkScreen':
+          window.history.pushState(null, '', '/bookmark');
+          break;
+        case 'MenuScreen':
+          window.history.pushState(null, '', '/menu');
+          break;
+        default:
+          break;
+      }
     };
     return (
       <div className='inner'>
         <div className="bottom-nav">
           <div className='bottom-nav-items'>
             <span
-              className={`nav-item ${activeScreen === 'MyplaceScreen' ? 'active' : ''}`}
-              onClick={() => handleScreenChange('MyplaceScreen')}
+              className={`nav-item ${activeScreen === 'SearchScreen' ? 'active' : ''}`}
+              onClick={() => handleScreenChange('SearchScreen')}
             >
               <div className='nav-items-icon'>              
-                <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.961 8.429c-.831.982-1.614 1.918-1.961 3.775v6.683l-4 2.479v-9.161c-.206-1.104-.566-1.885-1-2.539v11.475l-4-2.885v-13.069l1.577 1.138c-.339-.701-.577-1.518-.577-2.524l.019-.345-2.019-1.456-5.545 4-6.455-4v18l6.455 4 5.545-4 5.545 4 6.455-4v-11.618l-.039.047zm-17.961 12.936l-4-2.479v-13.294l4 2.479v13.294zm5-3.11l-4 2.885v-13.067l4-2.886v13.068zm9-18.255c-2.1 0-4 1.702-4 3.801 0 3.121 3.188 3.451 4 8.199.812-4.748 4-5.078 4-8.199 0-2.099-1.9-3.801-4-3.801zm0 5.5c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5 1.5.671 1.5 1.5-.672 1.5-1.5 1.5z"/></svg>
-                {/* <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.961 8.429c-.831.982-1.614 1.918-1.961 3.775v6.683l-4 2.479v-9.161c-.347-1.857-1.13-2.793-1.961-3.775-.908-1.075-2.039-2.411-2.039-4.629l.019-.345-2.019-1.456-5.545 4-6.455-4v18l6.455 4 5.545-4 5.545 4 6.455-4v-11.618l-.039.047zm-12.961 9.826l-4 2.885v-13.067l4-2.886v13.068zm9-18.255c-2.1 0-4 1.702-4 3.801 0 3.121 3.188 3.451 4 8.199.812-4.748 4-5.078 4-8.199 0-2.099-1.9-3.801-4-3.801zm0 5.5c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5 1.5.671 1.5 1.5-.672 1.5-1.5 1.5z"/></svg>               */}
+                <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z"/></svg>              
               </div>
-              <span className='nav-items-text'>내 지역 보기</span>
+              <span className='nav-items-text'>지역 검색</span>
             </span>
             <span
               className={`nav-item ${activeScreen === 'HomeScreen' ? 'active' : ''}`}
@@ -243,9 +420,9 @@ function App() {
               <span className='nav-items-text'>전체 지역보기</span>
             </span>
             <span
-              className={`nav-item ${activeScreen === 'BookmarkScreen' ? 'active' : ''}`}
-              onClick={() => handleScreenChange('BookmarkScreen')}
-            >
+            className={`nav-item ${activeScreen === 'BookmarkScreen' ? 'active' : ''}`}
+            onClick={() => handleScreenChange('BookmarkScreen')}
+          >
               <div className='nav-items-icon'>
               <svg width="30" height="30" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.322 2.923c.126-.259.39-.423.678-.423.289 0 .552.164.678.423.974 1.998 2.65 5.44 2.65 5.44s3.811.524 6.022.829c.403.055.65.396.65.747 0 .19-.072.383-.231.536-1.61 1.538-4.382 4.191-4.382 4.191s.677 3.767 1.069 5.952c.083.462-.275.882-.742.882-.122 0-.244-.029-.355-.089-1.968-1.048-5.359-2.851-5.359-2.851s-3.391 1.803-5.359 2.851c-.111.06-.234.089-.356.089-.465 0-.825-.421-.741-.882.393-2.185 1.07-5.952 1.07-5.952s-2.773-2.653-4.382-4.191c-.16-.153-.232-.346-.232-.535 0-.352.249-.694.651-.748 2.211-.305 6.021-.829 6.021-.829s1.677-3.442 2.65-5.44zm.678 2.033-2.361 4.792-5.246.719 3.848 3.643-.948 5.255 4.707-2.505 4.707 2.505-.951-5.236 3.851-3.662-5.314-.756z" fill-rule="nonzero"/></svg>
               {/* <svg width="24" height="24" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.322 2.923c.126-.259.39-.423.678-.423.289 0 .552.164.678.423.974 1.998 2.65 5.44 2.65 5.44s3.811.524 6.022.829c.403.055.65.396.65.747 0 .19-.072.383-.231.536-1.61 1.538-4.382 4.191-4.382 4.191s.677 3.767 1.069 5.952c.083.462-.275.882-.742.882-.122 0-.244-.029-.355-.089-1.968-1.048-5.359-2.851-5.359-2.851s-3.391 1.803-5.359 2.851c-.111.06-.234.089-.356.089-.465 0-.825-.421-.741-.882.393-2.185 1.07-5.952 1.07-5.952s-2.773-2.653-4.382-4.191c-.16-.153-.232-.346-.232-.535 0-.352.249-.694.651-.748 2.211-.305 6.021-.829 6.021-.829s1.677-3.442 2.65-5.44z" fill-rule="nonzero"/></svg> */}
@@ -266,7 +443,7 @@ function App() {
         </div>
         {/* 스크린선택 */}
         <div className="content">
-          {activeScreen === 'MyplaceScreen' && <MyplaceScreen />}
+          {activeScreen === 'SearchScreen' && <SearchScreen />}
           {activeScreen === 'HomeScreen' && <BaseCard />}
           {activeScreen === 'BookmarkScreen' && <BookmarkScreen />}
           {activeScreen === 'MenuScreen' && <MenuScreen />}
@@ -275,11 +452,12 @@ function App() {
     );
   };
 
+  
+
   // 앱 구성
   return (
     <div>
       <Header/>
-      {/* <BaseCard /> */}
       <BottomNavigationBar/>
     </div>
   );
