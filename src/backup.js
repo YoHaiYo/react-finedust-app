@@ -1,44 +1,64 @@
-// // 즐겨찾기 추가 함수
-// const BookmarkChange = ({ sidoName, stationName, pm10Value, dataTime }) => {
+// const BottomNavigationBar = () => {
+//   const [activeScreen, setActiveScreen] = useState('HomeScreen');
 //   const [isClicked, setIsClicked] = useState(false);
-//   useEffect(() => {
-//     const bookmarkedItems = JSON.parse(localStorage.getItem('bookmarkedItems')) || [];
-//     const isItemBookmarked = bookmarkedItems.some(
-//       (item) =>
-//         item.sidoName === sidoName &&
-//         item.stationName === stationName &&
-//         item.pm10Value === pm10Value &&
-//         item.dataTime === dataTime
-//     );
-//     setIsClicked(isItemBookmarked);
-//   }, [sidoName, stationName, pm10Value, dataTime]);
-//   const handleClick = () => {
-//     // 다른 바텀네비바를 클릭하면 즐겨찾기에 저장된 상태가 초기화되서 localStorage로 상태 데이터를 유저의 로컬장치에 저장하는 방법을 사용.
-//     const updatedBookmarkList = JSON.parse(localStorage.getItem('bookmarkedItems')) || [];  
-//     if (!isClicked) {
-//       const newItem = { sidoName, stationName, pm10Value, dataTime };
-//       updatedBookmarkList.push(newItem);
-//       setIsClicked(true);
-//     } else {
-//       const itemIndex = updatedBookmarkList.findIndex(
-//         (item) =>
-//           item.sidoName === sidoName &&
-//           item.stationName === stationName &&
-//           item.pm10Value === pm10Value &&
-//           item.dataTime === dataTime
-//       );
-//       if (itemIndex !== -1) {
-//         updatedBookmarkList.splice(itemIndex, 1);
-//         setIsClicked(false);
-//       }
-//     }
-//     // Update local storage with updated bookmarked items
-//     localStorage.setItem('bookmarkedItems', JSON.stringify(updatedBookmarkList));
-//     console.log(updatedBookmarkList)
+//   const handleScreenChange = (screen) => {
+//     setActiveScreen(screen);
+//     setIsClicked(true);
+    
 //   };
+
 //   return (
-//     <div className='bookmark' onClick={handleClick}>
-//       {isClicked ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}
+//     <div className='inner'>
+//       <div className="bottom-nav">
+//         <div className='bottom-nav-items'>
+//           <span
+//             className={`nav-item ${activeScreen === 'SearchScreen' ? 'active' : ''}`}
+//             onClick={() => handleScreenChange('SearchScreen')}
+//           >
+//             <div className='nav-items-icon'>              
+//             <span class="material-symbols-rounded">search</span>
+//             </div>
+//             <span className='nav-items-text'>지역 검색</span>
+//           </span>
+
+//           <span
+//             className={`nav-item ${activeScreen === 'HomeScreen' ? 'active' : ''}`}
+//             onClick={() => handleScreenChange('HomeScreen')}
+//           >
+//             <div className='nav-items-icon'>
+//             <span class="material-symbols-rounded">home</span>
+//               </div>
+//             <span className='nav-items-text'>전체 지역보기</span>
+//           </span>
+
+//           <span
+//           className={`nav-item ${activeScreen === 'BookmarkScreen' ? 'active' : ''}`}
+//           onClick={() => handleScreenChange('BookmarkScreen')}
+//         >
+//             <div className='nav-items-icon'>
+//             <span class="material-symbols-rounded">star</span>
+//             </div>
+//             <span className='nav-items-text'>즐겨찾기</span>
+//           </span>
+          
+//           <span
+//             className={`nav-item ${activeScreen === 'MenuScreen' ? 'active' : ''}`}
+//             onClick={() => handleScreenChange('MenuScreen')}
+//           >
+//             <div className='nav-items-icon'>
+//             <span class="material-symbols-rounded">menu</span>
+//             </div>
+//             <span className='nav-items-text'>메뉴</span>
+//           </span>
+//         </div>
+//       </div>
+//       {/* 스크린선택 */}
+//       <div className="content">
+//         {activeScreen === 'SearchScreen' && <SearchScreen />}
+//         {activeScreen === 'HomeScreen' && <BaseCard />}
+//         {activeScreen === 'BookmarkScreen' && <BookmarkScreen />}
+//         {activeScreen === 'MenuScreen' && <MenuScreen />}
+//       </div>
 //     </div>
 //   );
 // };

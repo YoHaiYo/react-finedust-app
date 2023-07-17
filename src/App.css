@@ -116,7 +116,7 @@ img{
   display: grid;
   gap: 5px;
   grid-template-columns: repeat(2, 1fr);
-  padding: 30px 0 0 1px;
+  padding: 30px 0 50px 0px;
 }
 .cardOuter .cardContainer {
   width: calc(var(--root-width)*0.55);
@@ -202,21 +202,27 @@ img{
 .bottom-nav .bottom-nav-items{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  color: #3f3f3f;
+  font-size: 11px;
 }
-.bottom-nav .bottom-nav-items .nav-items-icon{
+.nav-item.active{
+  color: rgb(87, 87, 255);  
+  font-size: 13px;
+  font-weight: 700;
+}
+.bottom-nav .bottom-nav-items .nav-items-text{
+  display: flex;
+  justify-content: center;
+}
+
+/* BottomNavigationBar Icons */
+.material-symbols-rounded{
+  font-size: 30px;
   display: flex;
   justify-content: center;
   padding: 2px;
 }
-.bottom-nav .bottom-nav-items .nav-items-text{
-  color: #3f3f3f;
-  font-size: 11px;
-  display: flex;
-  justify-content: center;
-}
 /* SearchScreen */
 .search-input{
   height: 18px;
-}
-.search-btn{
 }

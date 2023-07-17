@@ -192,24 +192,24 @@ function App() {
     
 
     /// ★API 통신으로 데이터 가져오기 : 원래코드
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch(GetApiData());
-          const data = await response.json();
-          const fetchedItems = data.response.body.items;
-          setItems(fetchedItems);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-      fetchData();
-    });
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     try {
+    //       const response = await fetch(GetApiData());
+    //       const data = await response.json();
+    //       const fetchedItems = data.response.body.items;
+    //       setItems(fetchedItems);
+    //     } catch (error) {
+    //       console.error('Error fetching data:', error);
+    //     }
+    //   };
+    //   fetchData();
+    // });
 
     /// ☆json파일로 데이터가져오기 : 서버오류일때 임시로 쓰기.
-    // useEffect(() => {
-    //   setItems(apiData.response.body.items);
-    // }, []);
+    useEffect(() => {
+      setItems(apiData.response.body.items);
+    }, []);
     
   // 기본 카드 구성
     return (      
@@ -336,7 +336,7 @@ function App() {
   
     return (
       <div className='basecard-inner'>
-        
+        <div className='sido-dropdown'>★를 눌러 즐겨찾기 추가하기</div>
         <div className='cardOuter'>
           {bookmarkedItems.map((item, index) => (
             <div
@@ -378,24 +378,9 @@ function App() {
     const handleScreenChange = (screen) => {
       setActiveScreen(screen);
       setIsClicked(true);
-      // 각 바텀네비바에 후속 url 주소 추가
-      switch (screen) {
-        case 'SearchScreen':
-          window.history.pushState(null, '', '/myplace');
-          break;
-        case 'HomeScreen':
-          window.history.pushState(null, '', '/');
-          break;
-        case 'BookmarkScreen':
-          window.history.pushState(null, '', '/bookmark');
-          break;
-        case 'MenuScreen':
-          window.history.pushState(null, '', '/menu');
-          break;
-        default:
-          break;
-      }
+      
     };
+
     return (
       <div className='inner'>
         <div className="bottom-nav">
@@ -404,38 +389,38 @@ function App() {
               className={`nav-item ${activeScreen === 'SearchScreen' ? 'active' : ''}`}
               onClick={() => handleScreenChange('SearchScreen')}
             >
-              <div className='nav-items-icon'>              
-                <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z"/></svg>              
-              </div>
+                      
+              <span className="google-icon" class="material-symbols-rounded">search</span>
+              
               <span className='nav-items-text'>지역 검색</span>
             </span>
+
             <span
               className={`nav-item ${activeScreen === 'HomeScreen' ? 'active' : ''}`}
               onClick={() => handleScreenChange('HomeScreen')}
             >
               <div className='nav-items-icon'>
-                <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg"viewBox="0 0 24 24"><path d="M20 7.093v-5.093h-3v2.093l3 3zm4 5.907l-12-12-12 12h3v10h7v-5h4v5h7v-10h3zm-5 8h-3v-5h-8v5h-3v-10.26l7-6.912 7 6.99v10.182z"/></svg>
-                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21 13v10h-6v-6h-6v6h-6v-10h-3l12-12 12 12h-3zm-1-5.907v-5.093h-3v2.093l3 3z"/></svg> */}
-              </div>
+              <span class="material-symbols-rounded">home</span>
+                </div>
               <span className='nav-items-text'>전체 지역보기</span>
             </span>
+
             <span
             className={`nav-item ${activeScreen === 'BookmarkScreen' ? 'active' : ''}`}
             onClick={() => handleScreenChange('BookmarkScreen')}
           >
               <div className='nav-items-icon'>
-              <svg width="30" height="30" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.322 2.923c.126-.259.39-.423.678-.423.289 0 .552.164.678.423.974 1.998 2.65 5.44 2.65 5.44s3.811.524 6.022.829c.403.055.65.396.65.747 0 .19-.072.383-.231.536-1.61 1.538-4.382 4.191-4.382 4.191s.677 3.767 1.069 5.952c.083.462-.275.882-.742.882-.122 0-.244-.029-.355-.089-1.968-1.048-5.359-2.851-5.359-2.851s-3.391 1.803-5.359 2.851c-.111.06-.234.089-.356.089-.465 0-.825-.421-.741-.882.393-2.185 1.07-5.952 1.07-5.952s-2.773-2.653-4.382-4.191c-.16-.153-.232-.346-.232-.535 0-.352.249-.694.651-.748 2.211-.305 6.021-.829 6.021-.829s1.677-3.442 2.65-5.44zm.678 2.033-2.361 4.792-5.246.719 3.848 3.643-.948 5.255 4.707-2.505 4.707 2.505-.951-5.236 3.851-3.662-5.314-.756z" fill-rule="nonzero"/></svg>
-              {/* <svg width="24" height="24" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.322 2.923c.126-.259.39-.423.678-.423.289 0 .552.164.678.423.974 1.998 2.65 5.44 2.65 5.44s3.811.524 6.022.829c.403.055.65.396.65.747 0 .19-.072.383-.231.536-1.61 1.538-4.382 4.191-4.382 4.191s.677 3.767 1.069 5.952c.083.462-.275.882-.742.882-.122 0-.244-.029-.355-.089-1.968-1.048-5.359-2.851-5.359-2.851s-3.391 1.803-5.359 2.851c-.111.06-.234.089-.356.089-.465 0-.825-.421-.741-.882.393-2.185 1.07-5.952 1.07-5.952s-2.773-2.653-4.382-4.191c-.16-.153-.232-.346-.232-.535 0-.352.249-.694.651-.748 2.211-.305 6.021-.829 6.021-.829s1.677-3.442 2.65-5.44z" fill-rule="nonzero"/></svg> */}
+              <span class="material-symbols-rounded">star</span>
               </div>
               <span className='nav-items-text'>즐겨찾기</span>
             </span>
+            
             <span
               className={`nav-item ${activeScreen === 'MenuScreen' ? 'active' : ''}`}
               onClick={() => handleScreenChange('MenuScreen')}
             >
               <div className='nav-items-icon'>
-              <svg width="30" height="30" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m22 16.75c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75z" fill-rule="nonzero"/></svg>
-              
+              <span class="material-symbols-rounded">menu</span>
               </div>
               <span className='nav-items-text'>메뉴</span>
             </span>
