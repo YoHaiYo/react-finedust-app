@@ -6,8 +6,7 @@
 
 **※ 아직 미완성입니다**
 
-![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/fb65d9a7-2c87-4dd2-91f2-88fa2008a4c7)
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/2b9aea38-5d59-4d1d-a712-00fb2f10194d)
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/463fe93d-7211-4393-8152-ed69e4875cfb)
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/97846345-e85d-4cb8-96c4-d3a8f3ba9655)
 
-![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/c4038211-e431-4207-86d1-e9424fd58e9c)
-
-![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/5b5275a6-5a7c-47c3-ac8c-b731d13d64a4)
