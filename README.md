@@ -4,8 +4,6 @@
 
 **3. 배포용 링크 : https://finedusk-alimi.netlify.app/**
 
-**※ 아직 미완성입니다**
-
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/2b9aea38-5d59-4d1d-a712-00fb2f10194d)
 
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/463fe93d-7211-4393-8152-ed69e4875cfb)
