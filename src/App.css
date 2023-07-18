@@ -131,6 +131,54 @@ title img{
   background-color: #7cacff;
   border-radius: 5px;
 }
+.choice-num10:hover{  
+  background-color: #a3ff8c;
+  color: #3f3f3f;
+  box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
+  transition: 0.25s;
+}
+.choice-num20:hover{  
+  background-color: #a3ff8c;
+  color: #3f3f3f;
+  box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
+  transition: 0.25s;
+}
+.choice-num30:hover{  
+  background-color: #a3ff8c;
+  color: #3f3f3f;
+  box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
+  transition: 0.25s;
+}
+.choice-num40:hover{  
+  background-color: #a3ff8c;
+  color: #3f3f3f;
+  box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
+  transition: 0.25s;
+}
+.choice-num10:active{  
+  background-color: #a3ff8c;
+  color: #3f3f3f;
+  box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
+  transition: 0.25s;
+}
+.choice-num20:active{  
+  background-color: #a3ff8c;
+  color: #3f3f3f;
+  box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
+  transition: 0.25s;
+}
+.choice-num30:active{  
+  background-color: #a3ff8c;
+  color: #3f3f3f;
+  box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
+  transition: 0.25s;
+}
+.choice-num40:active{  
+  background-color: #a3ff8c;
+  color: #3f3f3f;
+  box-shadow: 5px 5px 10px .5px rgb(190, 210, 255);
+  transition: 0.25s;
+}
 
 /* BaseCard */
 .basecard-inner{
@@ -185,6 +233,18 @@ title img{
   color: var(--root-color);
   font-size: 22px;
   cursor: pointer;
+}
+.cardOuter .cardContainer .card-wrap-top .bookmark:hover {
+  font-size: 24px;  
+  color: #ffea00;
+}
+.cardOuter .cardContainer .card-wrap-top .bookmark:active {
+  font-size: 24px;  
+  color: #ffea00;
+}
+.cardOuter .cardContainer .card-wrap-top .bookmark .fa-solid.fa-star{
+  font-size: 24px;  
+  color: #ffea00;
 }
 .cardOuter .cardContainer .card-wrap-middle{
   height: 70px;
@@ -367,4 +427,14 @@ title img{
 .menu-outer .menu-item .menu-text {
   font-size: 18px;
   color: #333333;
+}
+/* Loading */
+.loading-item{
+  width: var(--root-view-width);
+}
+.loading-item .loading-gif{
+  padding: 250px 0 0 130px;
+}
+.loading-item .loading-text{
+  padding: 50px 0 0 100px;
 }

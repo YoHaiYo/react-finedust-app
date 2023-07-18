@@ -129,7 +129,7 @@ function App() {
     )
   }
 
-  const [selectedSido, setSelectedSido] = useState('');
+  const [selectedSido, setSelectedSido] = useState('서울');
   const [numOfRows, setNumOfRows] = useState(10);
   const [isChoiceNumSelected, setIsChoiceNumSelected] = useState(false);
 
@@ -289,8 +289,8 @@ function App() {
           <SidoDropDown/>
           <div className='wrap-fixed'><HeaderState/></div>
           <div className='loading-item'>
-            <div className='loading-icon'>
-              <img src="/img/finedust-logo.png" alt="loading"/>
+            <div className='loading-gif'>
+              <img src="https://blog.kakaocdn.net/dn/tQqCo/btsn1J2ez24/K7bPC391gbHZikQCTyfAyK/img.gif" alt="loading"/>
             </div>
             <div className='loading-text'>데이터를 불러오는 중입니다...</div>
           </div>
@@ -392,8 +392,8 @@ function App() {
         </div>
           <div className='wrap-fixed'><HeaderState/></div>
           <div className='loading-item'>
-            <div className='loading-icon'>
-              <span class="material-symbols-rounded">settings</span>
+            <div className='loading-gif'>
+              <img src="https://blog.kakaocdn.net/dn/tQqCo/btsn1J2ez24/K7bPC391gbHZikQCTyfAyK/img.gif" alt="loading"/>
             </div>
             <div className='loading-text'>데이터를 불러오는 중입니다...</div>
           </div>
@@ -501,7 +501,6 @@ function App() {
 
       const handleMenuItemClick = (menuItem) => {
         let message = '';
-    
         // Set the appropriate message based on the clicked menu item
         switch (menuItem) {
           case 'Setting':
@@ -521,67 +520,71 @@ function App() {
             break;
           default:
             break;
-        }
-    
+        }    
         setMenuMessage(message);
       };
 
       return (
-      <div className='menu-outer'>
-
-          <div className='menu-title'>
-            <div className='menu-title-head'>심플 미세먼지 알리미</div>
-            <div className='menu-title-body'>
-              <div className='menu-title-text'>프로그램 버전 : 1.0</div>
-              <div className='menu-title-text'>제작일 : 23.07.19</div>
-              <div className='menu-title-text'>제작자 : YoHaYo</div>
-              <div className='menu-title-text--last'>
-                스터디용으로 만든 전국 미세먼지 정보를 간단히 볼 수 있는 앱 입니다.
-              <br/>아직 미흡한 점 양해부탁드려요. 
+        
+      <div>
+        <div className='top-menu-bar'></div>
+        <div className='wrap-fixed'><HeaderState/></div>
+        <div className='menu-outer'>
+  
+            <div className='menu-title'>
+              <div className='menu-title-head'>심플 미세먼지 알리미</div>
+              <div className='menu-title-body'>
+                <div className='menu-title-text'>프로그램 버전 : 1.0</div>
+                <div className='menu-title-text'>제작일 : 23.07.19</div>
+                <div className='menu-title-text'>제작자 : YoHaYo</div>
+                <div className='menu-title-text--last'>
+                  스터디용으로 만든 전국 미세먼지 정보를 간단히 볼 수 있는 앱 입니다.
+                <br/>아직 미흡한 점 양해부탁드려요. 
+                </div>
               </div>
+            </div>  
+  
+            <div className='menu-item' onClick={() => handleMenuItemClick('Setting')}>     
+              <span className='menu-icon'>
+                <span class="material-symbols-rounded">settings</span>
+              </span>
+              <span className='menu-text'>환경설정</span>
             </div>
-          </div>  
-
-          <div className='menu-item' onClick={() => handleMenuItemClick('Setting')}>     
-            <span className='menu-icon'>
-              <span class="material-symbols-rounded">settings</span>
-            </span>
-            <span className='menu-text'>환경설정</span>
+  
+            <div className='menu-item' onClick={() => handleMenuItemClick('Notice')}>               
+              <span className='menu-icon'>
+              <span class="material-symbols-rounded">mark_unread_chat_alt</span>
+              </span>
+              <span className='menu-text'>공지사항</span>
+            </div>
+  
+            <div className='menu-item' onClick={() => handleMenuItemClick('Help')}>              
+              <span className='menu-icon'>
+                <span class="material-symbols-rounded">help</span>
+              </span>
+              <span className='menu-text'>고객센터</span>
+            </div>
+            
+            <div className='menu-item' onClick={() => handleMenuItemClick('Info')}>              
+              <span className='menu-icon'>
+                <span class="material-symbols-rounded">info</span>
+              </span>
+              <span className='menu-text'>개발후기</span>
+            </div>
+  
+  
+            {menuMessage && (
+          <div className='menu-message'>
+            {menuMessage.split('\n').map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
           </div>
-
-          <div className='menu-item' onClick={() => handleMenuItemClick('Notice')}>               
-            <span className='menu-icon'>
-            <span class="material-symbols-rounded">mark_unread_chat_alt</span>
-            </span>
-            <span className='menu-text'>공지사항</span>
-          </div>
-
-          <div className='menu-item' onClick={() => handleMenuItemClick('Help')}>              
-            <span className='menu-icon'>
-              <span class="material-symbols-rounded">help</span>
-            </span>
-            <span className='menu-text'>고객센터</span>
-          </div>
-          
-          <div className='menu-item' onClick={() => handleMenuItemClick('Info')}>              
-            <span className='menu-icon'>
-              <span class="material-symbols-rounded">info</span>
-            </span>
-            <span className='menu-text'>개발후기</span>
-          </div>
-
-
-          {menuMessage && (
-        <div className='menu-message'>
-          {menuMessage.split('\n').map((line, index) => (
-            <React.Fragment key={index}>
-              {line}
-              <br />
-            </React.Fragment>
-          ))}
+            )}
+        
         </div>
-          )}
-      
       </div>
       );
     };
