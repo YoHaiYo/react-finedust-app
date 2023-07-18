@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-finedust-app/static/css/main.eb124545.css",
-    "main.js": "/react-finedust-app/static/js/main.2c73bcd1.js",
+    "main.js": "/react-finedust-app/static/js/main.76f50888.js",
     "static/js/787.3fef945c.chunk.js": "/react-finedust-app/static/js/787.3fef945c.chunk.js",
     "index.html": "/react-finedust-app/index.html",
     "main.eb124545.css.map": "/react-finedust-app/static/css/main.eb124545.css.map",
-    "main.2c73bcd1.js.map": "/react-finedust-app/static/js/main.2c73bcd1.js.map",
+    "main.76f50888.js.map": "/react-finedust-app/static/js/main.76f50888.js.map",
     "787.3fef945c.chunk.js.map": "/react-finedust-app/static/js/787.3fef945c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.eb124545.css",
-    "static/js/main.2c73bcd1.js"
+    "static/js/main.76f50888.js"
   ]
 }
