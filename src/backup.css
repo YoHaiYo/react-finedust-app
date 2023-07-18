@@ -1,0 +1,68 @@
+Menu Screen
+.menu-outer{
+  width: calc(var(--root-width)*0.9);
+  margin: 0 auto;
+  position: fixed;
+  z-index: 10;
+  top: 8px;
+  right: 36%;
+  background-color: #e2edff;
+  height: 93.5vh;
+  border-radius: 10px;
+}
+.menu-outer .menu-title{
+  height: 200px;
+  background-color: #97bfff94;
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+.menu-outer .menu-title .menu-title-head{
+  font-size: 25px;
+  font-weight: 500;
+}
+.menu-outer .menu-title .menu-title-body{
+  position: absolute;
+  top: 80px;
+  font-size: 18px;
+  padding: 10px;
+}
+.menu-outer .menu-title .menu-title-body .menu-title-text{
+  padding: 5px;
+}
+.menu-outer .menu-item{
+  display: flex;
+  justify-content: right;
+  height: 60px;
+  margin: 10px;
+  position: relative;
+  border-radius: 10px 10px 0 0px;
+  border-bottom: #606060a6 solid 1px; 
+  transition: 0.3s;
+}
+.menu-outer .menu-item:hover,.menu-outer .menu-item:hover{
+  display: flex;
+  justify-content: right;
+  height: 60px;
+  background-color: #b3d0ff;
+  margin: 10px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 0px #d0d0d0;
+}
+.menu-outer .menu-item .menu-icon{
+  position: absolute;
+  left: 40%;
+  top: 25%;
+}
+.menu-outer .menu-item .menu-icon .material-symbols-rounded{
+  font-size: 29px;
+}
+.menu-outer .menu-item .menu-text{
+  position: absolute;
+  left: 55%;
+  top: 25%;
+  font-size: 21px;
+}

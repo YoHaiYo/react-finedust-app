@@ -6,7 +6,7 @@
   --root-height: 200px;
   --root-color: #fff;;
 }
-img{
+title img{
   display: block;
 }
 .inner{
@@ -246,7 +246,7 @@ img{
 }
 
 /* BottomNavigationBar Icons */
-.material-symbols-rounded{
+.bottom-nav-items .material-symbols-rounded{
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -267,27 +267,104 @@ img{
   padding: 5px 5px 25px 5px;
 }
 /* Menu Screen */
-.menu-outer{
-  width: var(--root-view-width);
+.menu-outer {
+  width: calc(var(--root-width)*0.8);
+  max-width: 500px;
   margin: 0 auto;
-  /* 부모요소에 position: relative가 있어야 기준이 생겨서 배치가 제대로됨.  */
   position: fixed;
   z-index: 10;
-  top: 5px;
-  /* background-color: rgb(239, 186, 255); */
-  /* border: #3f3f3f solid 1px; */
-}
-.menu-outer.hide{
-  width: var(--root-view-width);
-  margin: 0 auto;
-  /* 부모요소에 position: relative가 있어야 기준이 생겨서 배치가 제대로됨.  */
-  position: fixed;
-  z-index: 10;
-  top: 5px;
-  /* background-color: rgb(239, 186, 255); */
-  /* border: #3f3f3f solid 1px; */
-}
-.menu-outer .wrap-menu{
-  background-color: #5190fc;
+  top: 8px;
+  right: 36%;
+  background-color: #f5faff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 93.5vh;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+.menu-outer .menu-message{
+  display: flex;
+  align-items: center;
+  height: 250px;
+  margin: 10px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #c6e1ff;
+}
+
+.menu-outer .menu-title {
+  height: 200px;
+  background-color: #cfe2f5;
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+}
+
+.menu-outer .menu-title .menu-title-head {
+  font-size: 25px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #7cacff;
+  border-radius: 5px;
+}
+
+.menu-outer .menu-title .menu-title-body {
+  position: absolute;
+  top: 37px;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.menu-outer .menu-title .menu-title-body .menu-title-text {
+  padding: 5px;
+  color: #4b4b4b;
+}
+.menu-outer .menu-title .menu-title-body .menu-title-text--last {
+  padding: 2px;
+  color: #777777;
+  font-size: 13px;
+}
+
+.menu-outer .menu-item {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  margin: 10px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #eaf2fb;
+}
+
+.menu-outer .menu-item:hover {
+  background-color: #d5e9ff;
+  transition: 0.3s;
+}
+.menu-outer .menu-item:active {
+  background-color: #aad3ff;
+  transition: 0.2s;
+}
+
+.menu-outer .menu-item .menu-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #6fa2d6;
+  margin-right: 10px;
+}
+
+.menu-outer .menu-item .menu-icon .material-symbols-rounded {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.menu-outer .menu-item .menu-text {
+  font-size: 18px;
+  color: #333333;
 }

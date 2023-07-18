@@ -82,14 +82,30 @@ import apiData from './apiData.json'
       // Update local storage with updated bookmarked items
       localStorage.setItem('bookmarkedItems', JSON.stringify(updatedBookmarkList));
       console.log(updatedBookmarkList)
-    };
-    
+    };    
     return (
       <div className='bookmark' onClick={handleClick}>
         {isClicked ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}
       </div>
     );
   };
+
+  /// js기본문법 - 스벅 프로모션 ↑ 접어었다펴기
+  // const promotionEl = document.querySelector('.wrap-menu'); // 펼쳤다 접을 클래스
+  // const promotionToggleBtn = document.querySelector('.menu-btn') // 버튼으로 쓸 클래스
+  // let isHidePromotion = false;
+  // promotionToggleBtn.addEventListener('click', function() {
+  //   // 클릭할때마다 참,거짓 반전시켜서 토글 열었다 닫았다하는거임.
+  //   isHidePromotion = !isHidePromotion
+  //   if (isHidePromotion) {
+  //     // 숨김 처리
+  //     promotionEl.classList.add('hide');
+  //   } else {
+  //     // 보임 처리
+  //     promotionEl.classList.remove('hide');
+  //   }
+  // });
+  
 
 function App() {
 
@@ -432,14 +448,91 @@ function App() {
 
     // 메뉴스크린
     const MenuScreen = () => {
+      const [menuMessage, setMenuMessage] = useState('');
+
+      const handleMenuItemClick = (menuItem) => {
+        let message = '';
+    
+        // Set the appropriate message based on the clicked menu item
+        switch (menuItem) {
+          case 'Setting':
+            message = '환경설정에 대한 메뉴입니다.';
+            break;
+          case 'Notice':
+            message = '공지사항에 대한 메뉴입니다.';
+            break;
+          case 'Info':
+            message = `
+             개발하면서 기초를 철저히 하는것이 중요하다는걸 느꼈습니다.
+            그리고 코드가 아닌 API 통신서버가 문제된다던지, 
+             모바일기기마다 다르게 UI가 보여서 특정기기에서는 깨져서 보일 수 있다던지하는 보이는것 외에도 신경쓸게 참 많다는걸 알게되었습니다. `;
+            break;
+          case 'Help':
+            message = '고객센터에 대한 메뉴입니다.';
+            break;
+          default:
+            break;
+        }
+    
+        setMenuMessage(message);
+      };
 
       return (
       <div className='menu-outer'>
-        <div className='wrap-menu'>
-          <div className='menu-1'>menu-1</div>
-          <div className='menu-1'>menu-1</div>
-          <div className='menu-1'>menu-1</div>
+
+          <div className='menu-title'>
+            <div className='menu-title-head'>심플 미세먼지 알리미</div>
+            <div className='menu-title-body'>
+              <div className='menu-title-text'>프로그램 버전 : 1.0</div>
+              <div className='menu-title-text'>제작일 : 23.07.19</div>
+              <div className='menu-title-text'>제작자 : YoHaYo</div>
+              <div className='menu-title-text--last'>
+                스터디용으로 만든 전국 미세먼지 정보를 간단히 볼 수 있는 앱 입니다.
+              <br/>아직 미흡한 점 양해부탁드려요. 
+              </div>
+            </div>
+          </div>  
+
+          <div className='menu-item' onClick={() => handleMenuItemClick('Setting')}>     
+            <span className='menu-icon'>
+              <span class="material-symbols-rounded">settings</span>
+            </span>
+            <span className='menu-text'>환경설정</span>
+          </div>
+
+          <div className='menu-item' onClick={() => handleMenuItemClick('Notice')}>               
+            <span className='menu-icon'>
+            <span class="material-symbols-rounded">mark_unread_chat_alt</span>
+            </span>
+            <span className='menu-text'>공지사항</span>
+          </div>
+
+          <div className='menu-item' onClick={() => handleMenuItemClick('Help')}>              
+            <span className='menu-icon'>
+              <span class="material-symbols-rounded">help</span>
+            </span>
+            <span className='menu-text'>고객센터</span>
+          </div>
+          
+          <div className='menu-item' onClick={() => handleMenuItemClick('Info')}>              
+            <span className='menu-icon'>
+              <span class="material-symbols-rounded">info</span>
+            </span>
+            <span className='menu-text'>개발후기</span>
+          </div>
+
+
+          {menuMessage && (
+        <div className='menu-message'>
+          {menuMessage.split('\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
         </div>
+          )}
+      
       </div>
       );
     };
@@ -461,7 +554,7 @@ function App() {
               onClick={() => handleScreenChange('SearchScreen')}
             >
                       
-              <span className="google-icon" class="material-symbols-rounded">search</span>
+              <span class="material-symbols-rounded">search</span>
               
               <span className='nav-items-text'>지역 검색</span>
             </span>
