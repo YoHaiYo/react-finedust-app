@@ -10,5 +10,7 @@
 
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/463fe93d-7211-4393-8152-ed69e4875cfb)
 
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/597e0459-af06-4c48-be34-3843eedd06b8)
+
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/97846345-e85d-4cb8-96c4-d3a8f3ba9655)
 
