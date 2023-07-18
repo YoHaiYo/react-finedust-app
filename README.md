@@ -9,14 +9,13 @@ https://finedusk-alimi.netlify.app/
 https://yohaiyo.github.io/react-finedust-app/
 
 (배포용 주소에서는 API 호출이 안되네요...)
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/3545be30-7e22-4af1-ba08-659f8cc68062)
 
-https://dcimg8.dcinside.co.kr/viewimage.php?id=3ab8d222e0c4&no=24b0d769e1d32ca73dea81fa11d028311869dac7d33bec80aa651ee0dd05d27616ee4b03b2c4fdb42f2b84dc2eb12b52ba09c77c99bb135eb1504198
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/5b44db70-2ea4-4483-bc53-7058e23cb68a)
 
-![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/2b9aea38-5d59-4d1d-a712-00fb2f10194d)
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/c92ee58a-a9d0-42db-b54e-0c2c04ffdb53)
 
-![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/463fe93d-7211-4393-8152-ed69e4875cfb)
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/975085ac-a003-452c-b1a1-3bfea45c9de7)
 
-![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/597e0459-af06-4c48-be34-3843eedd06b8)
-
-![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/97846345-e85d-4cb8-96c4-d3a8f3ba9655)
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/47fb4a87-4128-4e2f-b97c-1575e660e525)
 
