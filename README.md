@@ -10,6 +10,8 @@ https://yohaiyo.github.io/react-finedust-app/
 
 (배포용 주소에서는 API 호출이 안되네요...)
 
+https://dcimg8.dcinside.co.kr/viewimage.php?id=3ab8d222e0c4&no=24b0d769e1d32ca73dea81fa11d028311869dac7d33bec80aa651ee0dd05d27616ee4b03b2c4fdb42f2b84dc2eb12b52ba09c77c99bb135eb1504198
+
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/2b9aea38-5d59-4d1d-a712-00fb2f10194d)
 
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/463fe93d-7211-4393-8152-ed69e4875cfb)
