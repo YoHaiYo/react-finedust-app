@@ -228,6 +228,7 @@ function App() {
       return (`${baseURL}?${queryString}`);
     };
 
+    // 검색용으로 전체 시도의 모든 측정소를 불러오는 함수입니다.
     const GetApiDataFunction = (selectedSido,numOfRows) => {
       // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
       const apiKey = 'Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA+9GTuGyRDBE7rDIMg3+kQJaRxk3ulGEMe9A==';
@@ -249,6 +250,7 @@ function App() {
 
   const BaseCard  = () => {
     const [items, setItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
     const bookmarkedItems = JSON.parse(localStorage.getItem('bookmarkedItems')) || [];
@@ -264,11 +266,13 @@ function App() {
           const data = await response.json();
           const fetchedItems = data.response.body.items;
           setItems(fetchedItems);
-          console.log(data)
+          setIsLoading(false); // Set loading state to false after data is fetched
+          console.log(data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
       };
+  
       fetchData();
     }, []); //, []해줘야 한번만 호출됨 !!
 
@@ -280,6 +284,18 @@ function App() {
   // 기본 카드 구성
     return (      
       <div className='basecard-inner'>
+        {isLoading ?  // Conditionally render the loading window
+        (<div className='loading-window'>
+          <SidoDropDown/>
+          <div className='wrap-fixed'><HeaderState/></div>
+          <div className='loading-item'>
+            <div className='loading-icon'>
+              <img src="/img/finedust-logo.png" alt="loading"/>
+            </div>
+            <div className='loading-text'>데이터를 불러오는 중입니다...</div>
+          </div>
+        </div>) : 
+        (<React.Fragment>
         <SidoDropDown/>
         <div className='wrap-fixed'><HeaderState/></div>
         <div className='cardOuter'>
@@ -303,6 +319,8 @@ function App() {
               </div>
             ))}
         </div>
+        </React.Fragment>
+      )}
       </div>
     );
   };
@@ -313,12 +331,14 @@ function App() {
     const [searchText, setSearchText] = useState('');
     const [isSearching, setIsSearching] = useState(false);
     const [items, setItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
   
     const fetchData = async () => {
       try {
         const response = await fetch(GetApiDataFunction('전국',643)); // 전국 totalCount=643개 이므로 여기서 검색해야 전체검색됨 !
         const data = await response.json();
         const fetchedItems = data.response.body.items;
+        setIsLoading(false); // Set loading state to false after data is fetched
         const filteredItems = fetchedItems.filter(
           (item) => item.stationName.toLowerCase().includes(searchText.toLowerCase())
         );
@@ -330,6 +350,7 @@ function App() {
   
     useEffect(() => {
       if (isSearching) {
+        setIsLoading(true);
         fetchData();
       }
     }, [isSearching]);
@@ -352,6 +373,32 @@ function App() {
   
     return (
       <div className='basecard-inner'>
+        {isLoading ?  // Conditionally render the loading window
+        (<div className='loading-window'>
+          <div className='top-menu-bar'>
+          <span className='wrap-search-input'>
+            <input 
+              className='search-input'
+              type='text'
+              placeholder='구/동/도로명으로 검색'
+              value={searchText}
+              onChange={handleSearchInputChange}
+      
+            />
+          </span>
+          <span className='wrap-search-btn'>
+            <button className='search-btn' onClick={handleSearchButtonClick} onKeyUp={handleKeyUp}>검색</button>
+          </span>
+        </div>
+          <div className='wrap-fixed'><HeaderState/></div>
+          <div className='loading-item'>
+            <div className='loading-icon'>
+              <span class="material-symbols-rounded">settings</span>
+            </div>
+            <div className='loading-text'>데이터를 불러오는 중입니다...</div>
+          </div>
+        </div>) : 
+        (<React.Fragment>
         <div className='top-menu-bar'>
           <span className='wrap-search-input'>
             <input 
@@ -397,6 +444,8 @@ function App() {
             </div>
           ))}
         </div>
+        </React.Fragment>
+        )}
       </div>
     );
   };
