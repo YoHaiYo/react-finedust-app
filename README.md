@@ -8,7 +8,7 @@ https://finedusk-alimi.netlify.app/
 
 https://yohaiyo.github.io/react-finedust-app/
 
-(배포용 주소에서는 API 호출이 안되네요...)
+배포용 주소에서는 API 호출이 안되네요. 작동 되는 모습을 gif로 만들어놨습니다. https://yohayo.tistory.com/57
 
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/3545be30-7e22-4af1-ba08-659f8cc68062)
 
