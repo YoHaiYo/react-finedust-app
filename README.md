@@ -4,7 +4,7 @@
 
 **3. 배포용 링크 :** 
 
-https://finedusk-alimi.netlify.app/
+https://yohayo-fineduskalimi.netlify.app/
 
 https://yohaiyo.github.io/react-finedust-app/
 
