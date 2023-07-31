@@ -6,9 +6,8 @@
 
 https://yohayo-fineduskalimi.netlify.app/
 
-배포용 주소에서는 API 호출이 아직안됩니다. 운영계정 신청은 했으나 승인 전 입니다.
-
-작동 되는 모습을 gif로 만들어놨습니다. https://yohayo.tistory.com/57
+배포용 주소에서는 API 호출이 아직안됩니다. 운영계정 신청은 했으나 승인 전 입니다. 
+-> 운영계정 승인완료 !(23.07.31) 이제 API 호출됩니다..! 
 
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/3545be30-7e22-4af1-ba08-659f8cc68062)
 
