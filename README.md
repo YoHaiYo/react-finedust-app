@@ -18,7 +18,8 @@ https://yohayo-fineduskalimi.netlify.app/
 
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/975085ac-a003-452c-b1a1-3bfea45c9de7)
 
-![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/47fb4a87-4128-4e2f-b97c-1575e660e525)
+![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/3821fbca-c210-4874-955d-b2282b0ca741)
+
 
 **5. 개발후기**
 개발하면서 기초를 철저히 하는것이 중요하다는걸 느꼈습니다.
