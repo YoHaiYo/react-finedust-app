@@ -59,7 +59,7 @@ title img{
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0px #d0d0d0;
   color: var(--root-color);
-  font-size: 14px;
+  font-size: 13px;
 }
 .good{
   /* display: flex; */
@@ -329,27 +329,28 @@ title img{
 /* Menu Screen */
 .menu-outer {
   width: calc(var(--root-width)*0.8);
-  max-width: 500px;
+  /* max-width: 500px; */
   margin: 0 auto;
-  position: fixed;
+  position: absolute;
   z-index: 10;
-  top: 8px;
-  right: 36%;
+  top: 90px;
+  right: 0px;
   background-color: #f5faff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 93.5vh;
+  /* height: 600px; */
   border-radius: 10px;
   overflow-y: auto;
 }
 .menu-outer .menu-message{
   display: flex;
   align-items: center;
-  height: 250px;
+  /* min-height: 100px; */
   margin: 10px;
   position: relative;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #c6e1ff;
+  font-size: 12px;
 }
 
 .menu-outer .menu-title {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css'
-import apiData from './apiData.json'
+// import apiData from './apiData.json'
 
 /// App함수 밖으로 빼서 전역함수로 만들기 ! 
   // 미세먼지 수치에 따른 카드 색변경
@@ -113,7 +113,7 @@ function App() {
     return(
       <div className='inner'>
         <div className='fixed-bar-top'>
-          <span className='title'><img src="/img/finedust-logo.png" alt="title-logo"/></span>          
+          <span className='title'><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FnGhEY%2FbtsnZw3VhNw%2FVEFVbHU2exaI27wYaFtaqk%2Fimg.png" alt="title-logo"/></span>          
         </div>
       </div>
     )
@@ -132,7 +132,6 @@ function App() {
   const [selectedSido, setSelectedSido] = useState('서울');
   const [numOfRows, setNumOfRows] = useState(10);
   const [isChoiceNumSelected, setIsChoiceNumSelected] = useState(false);
-
   const handleChangeSido = (event) => {
     const newSelectedSido = event.target.value;
     setSelectedSido(newSelectedSido);
@@ -193,9 +192,9 @@ function App() {
 
   // # GetApiDataXXX 는 GetApiData와 같은 기능의 함수인데 더 직관적인거 같아서 비교안으로 남겨둡니다. 
   const GetApiDataXXX = () => {
-    // fullURL : http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=서울&pageNo=1&numOfRows=10&returnType=json&serviceKey=Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA%2B9GTuGyRDBE7rDIMg3%2BkQJaRxk3ulGEMe9A%3D%3D&ver=1.0
+    // fullURL : https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=서울&pageNo=1&numOfRows=10&returnType=json&serviceKey=Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA%2B9GTuGyRDBE7rDIMg3%2BkQJaRxk3ulGEMe9A%3D%3D&ver=1.0
     // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
-    const baseURL = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
+    const baseURL = 'https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
     // 시도이름(18개) : 전국, 서울, 부산, 대구, 인천, 광주, 대전, 울산, 경기, 강원, 충북, 충남, 전북, 전남, 경북, 경남, 제주, 세종
     const sidoName = selectedSido
     const pageNo = '1'
@@ -212,7 +211,7 @@ function App() {
   const GetApiData = () => {
       // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
       const apiKey = 'Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA+9GTuGyRDBE7rDIMg3+kQJaRxk3ulGEMe9A==';
-      const baseURL = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
+      const baseURL = 'https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
       const queryParams = {    
         // 시도이름(18개) : 전국, 서울, 부산, 대구, 인천, 광주, 대전, 울산, 경기, 강원, 충북, 충남, 전북, 전남, 경북, 경남, 제주, 세종
         sidoName: selectedSido,
@@ -232,7 +231,7 @@ function App() {
     const GetApiDataFunction = (selectedSido,numOfRows) => {
       // %3D%3D 는 == 을 의미한다. https://www.w3schools.com/tags/ref_urlencode.ASP 참고.
       const apiKey = 'Ikzw3SfvaxIdli8OxevjDkVYC5iCdUFCiSnzQXNuT81qkRZuwGA+9GTuGyRDBE7rDIMg3+kQJaRxk3ulGEMe9A==';
-      const baseURL = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
+      const baseURL = 'https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
       const queryParams = {    
         // 시도이름(18개) : 전국, 서울, 부산, 대구, 인천, 광주, 대전, 울산, 경기, 강원, 충북, 충남, 전북, 전남, 경북, 경남, 제주, 세종
         sidoName: selectedSido,
@@ -510,10 +509,7 @@ function App() {
             message = '공지사항에 대한 메뉴입니다.';
             break;
           case 'Info':
-            message = `
-             개발하면서 기초를 철저히 하는것이 중요하다는걸 느꼈습니다.
-            그리고 코드가 아닌 API 통신서버가 문제된다던지, 
-             모바일기기마다 다르게 UI가 보여서 특정기기에서는 깨져서 보일 수 있다던지하는 보이는것 외에도 신경쓸게 참 많다는걸 알게되었습니다. `;
+            message = `https://github.com/YoHaiYo/react-finedust-app`;
             break;
           case 'Help':
             message = '고객센터에 대한 메뉴입니다.';
@@ -529,61 +525,72 @@ function App() {
       <div>
         <div className='top-menu-bar'></div>
         <div className='wrap-fixed'><HeaderState/></div>
-        <div className='menu-outer'>
-  
-            <div className='menu-title'>
-              <div className='menu-title-head'>심플 미세먼지 알리미</div>
-              <div className='menu-title-body'>
-                <div className='menu-title-text'>프로그램 버전 : 1.0</div>
-                <div className='menu-title-text'>제작일 : 23.07.19</div>
-                <div className='menu-title-text'>제작자 : YoHaYo</div>
-                <div className='menu-title-text--last'>
-                  스터디용으로 만든 전국 미세먼지 정보를 간단히 볼 수 있는 앱 입니다.
-                <br/>아직 미흡한 점 양해부탁드려요. 
+        <div className='inner'>
+          <div className='menu-outer'>
+    
+              <div className='menu-title'>
+                <div className='menu-title-head'>심플 미세먼지 알리미</div>
+                <div className='menu-title-body'>
+                  <div className='menu-title-text'>버전 : 1.0</div>
+                  <div className='menu-title-text'>제작일 : 23.07.19</div>
+                  <div className='menu-title-text'>제작자 : YoHaYo</div>
+                  <div className='menu-title-text--last'>
+                    미세먼지 데이터 출처 : 에어코리아
+                  <br/><br/>※ 간혹 통신오류로 미세먼지 정보를 불러오지 못하는 경우가 있습니다. 
+                  </div>
                 </div>
+              </div>  
+    
+              <div className='menu-item' onClick={() => handleMenuItemClick('Setting')}>     
+                <span className='menu-icon'>
+                  <span class="material-symbols-rounded">settings</span>
+                </span>
+                <span className='menu-text'>환경설정</span>
               </div>
-            </div>  
-  
-            <div className='menu-item' onClick={() => handleMenuItemClick('Setting')}>     
-              <span className='menu-icon'>
-                <span class="material-symbols-rounded">settings</span>
-              </span>
-              <span className='menu-text'>환경설정</span>
-            </div>
-  
-            <div className='menu-item' onClick={() => handleMenuItemClick('Notice')}>               
-              <span className='menu-icon'>
-              <span class="material-symbols-rounded">mark_unread_chat_alt</span>
-              </span>
-              <span className='menu-text'>공지사항</span>
-            </div>
-  
-            <div className='menu-item' onClick={() => handleMenuItemClick('Help')}>              
-              <span className='menu-icon'>
-                <span class="material-symbols-rounded">help</span>
-              </span>
-              <span className='menu-text'>고객센터</span>
-            </div>
-            
-            <div className='menu-item' onClick={() => handleMenuItemClick('Info')}>              
-              <span className='menu-icon'>
-                <span class="material-symbols-rounded">info</span>
-              </span>
-              <span className='menu-text'>개발후기</span>
-            </div>
-  
-  
-            {menuMessage && (
+    
+              <div className='menu-item' onClick={() => handleMenuItemClick('Notice')}>               
+                <span className='menu-icon'>
+                <span class="material-symbols-rounded">mark_unread_chat_alt</span>
+                </span>
+                <span className='menu-text'>공지사항</span>
+              </div>
+    
+              <div className='menu-item' onClick={() => handleMenuItemClick('Help')}>              
+                <span className='menu-icon'>
+                  <span class="material-symbols-rounded">help</span>
+                </span>
+                <span className='menu-text'>고객센터</span>
+              </div>
+              
+              <div className='menu-item' onClick={() => handleMenuItemClick('Info')}>              
+                <span className='menu-icon'>
+                  <span class="material-symbols-rounded">info</span>
+                </span>
+                <span className='menu-text'>개발자정보</span>
+              </div>
+    
+    
+              {menuMessage && (
           <div className='menu-message'>
-            {menuMessage.split('\n').map((line, index) => (
-              <React.Fragment key={index}>
-                {line}
-                <br />
-              </React.Fragment>
-            ))}
+          {/* Display the menu message */}
+          {menuMessage.includes('http') ? (
+            // 주소로 링크 이동
+            <a href={menuMessage} target='_blank' rel='noopener noreferrer'>
+              {menuMessage}
+            </a>
+          ) : (
+        // Otherwise, display it as plain text
+        menuMessage.split('\n').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          <br />
+        </React.Fragment>
+      ))
+    )}
+  </div>
+              )}
+          
           </div>
-            )}
-        
         </div>
       </div>
       );
