@@ -6,7 +6,9 @@
 
 https://yohayo-fineduskalimi.netlify.app/
 
-운영계정 승인완료 !(23.07.31) 이제 API 호출됩니다..! 
+운영계정 승인완료 !(23.07.31) 이제 API 호출됩니다..!
+
+**4. 미리보기**
 
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/3545be30-7e22-4af1-ba08-659f8cc68062)
 
@@ -18,3 +20,7 @@ https://yohayo-fineduskalimi.netlify.app/
 
 ![image](https://github.com/YoHaiYo/react-finedust-app/assets/124754510/47fb4a87-4128-4e2f-b97c-1575e660e525)
 
+**5. 개발후기**
+개발하면서 기초를 철저히 하는것이 중요하다는걸 느꼈습니다.
+그리고 코드가 아닌 API 통신서버가 문제된다던지, 
+모바일기기마다 다르게 UI가 보여서 특정기기에서는 깨져서 보일 수 있다던지하는 보이는것 외에도 신경쓸게 참 많다는걸 알게되었습니다. 
